@@ -1,0 +1,165 @@
+body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: #f5506e;
+}
+
+h1 {
+  color: #7f7f7f;
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.btn-style {
+  background-color: #f5506e;
+  border-radius: 25px;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 14px;
+  padding: 14px 13px 12px;
+  /* transition: all 0.5s; */
+  outline: 0;
+}
+
+.btn-style::first-letter {
+  text-transform: uppercase;
+}
+
+.container {
+  margin-block: auto;
+}
+
+.photo-editor {
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  margin-inline: auto;
+  background: transparent;
+  border: 0;
+}
+
+.card {
+  background: white;
+  border: 0;
+}
+
+.card-1 {
+  flex: 1;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 15px 60px #861a30;
+  /* z-index: 10; */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form label {
+  margin-bottom: 5px;
+  color: #7f7f7f;
+}
+
+form input {
+  transition: all 0.1s;
+}
+
+form input.btn-style {
+  color: #7f7f7f;
+  background: transparent;
+  border: 1px solid rgba(127, 127, 127, 0.5);
+}
+
+form input.btn-style::first-letter {
+  text-transform: uppercase;
+}
+
+form input.btn-style:focus {
+  outline: 2px solid rgba(245, 80, 110, 0.8);
+}
+
+form .btn.btn-style {
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+form .btn.btn-style:hover {
+  background-color: #fb3358;
+  font-weight: 500;
+}
+
+label::first-letter {
+  text-transform: uppercase;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #fb3358; /* Change the color of the thumb */
+  /* Add a border to the thumb */
+  border-radius: 50%; /* Make the thumb round */
+}
+
+input[type="range"]::-moz-range-thumb {
+  background-color: #fb3358; /* Change the color of the thumb */
+  /* Add a border to the thumb */
+  border-radius: 50%; /* Make the thumb round */
+}
+
+input[type="range"]::-ms-thumb {
+  background-color: #fb3358; /* Change the color of the thumb */
+  /* Add a border to the thumb */
+  border-radius: 50%; /* Make the thumb round */
+}
+
+/* card2 */
+
+.card-2 {
+  flex: 2;
+  margin: 25px;
+  margin-left: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.card__img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: relative;
+}
+
+.img-placeholder {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.loading-gif {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(./Rolling-1s-200px.gif);
+  background-size: 100%;
+  display: none;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

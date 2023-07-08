@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="photo-editor">
+        <div class="card card-1">
+          <h1>Photo Editor</h1>
+
+          <form action="">
+            <input
+              type="text"
+              class="form-conttrol btn-style"
+              placeholder="Enter Image URL"
+              id="url"
+            />
+            <button id="submit" type="button" class="btn btn-primary btn-style">
+              submit
+            </button>
+          </form>
+          <label for="customRange1" class="form-label">brightness</label>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="200"
+            id="brightness"
+          />
+          <label for="customRange1" class="form-label">contrast</label>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="200"
+            id="contrast"
+          />
+          <label for="customRange1" class="form-label">hue</label>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="200"
+            id="hue-rotate"
+          />
+          <label for="customRange1" class="form-label">blur</label>
+          <input type="range" class="form-range" min="0" max="200" id="blur" />
+          <label for="customRange1" class="form-label">saturation</label>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="200"
+            id="saturate"
+          />
+          <label for="customRange1" class="form-label">sepia</label>
+          <input type="range" class="form-range" min="0" max="200" id="sepia" />
+        </div>
+        <div class="card card-2">
+          <figure class="card__img">
+            <img
+              src="https://play-lh.googleusercontent.com/zvuqfxWWv581MWVTlstjf66dO868Olsa1GJcMzYoKQs_wt6jnN5BHRbnhdbKG5XK_F0ZuA"
+              alt=""
+              class="img"
+            />
+            <div class="img-placeholder">
+              <div class="loading-gif"></div>
+              <!-- <img src="./Rolling-1s-200px.gif" alt="" class="loading-gif" /> -->
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"
+      integrity="sha512-fHXRw0CXruAoINU11+hgqYvY/PcsOWzmj0QmcSOtjlJcqITbPyypc8cYpidjPurWpCnlB8VKfRwx6PIpASCUkQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const placeholder = document.querySelector(".img-placeholder");
+      const loading = document.querySelector(".loading-gif");
+      const image = document.querySelector(".img");
+      const range = document.querySelectorAll("input[type='range']");
+      const url = document.querySelector("#url");
+      const btn = document.querySelector("#submit");
+
+      let css = {
+        brightness: 0.8,
+        contrast: 0.8,
+        "hue-rotate": "0turn",
+        blur: "0px",
+        saturate: 1,
+        sepia: 0,
+      };
+
+      btn.addEventListener("click", (e) => {
+        placeholder.style.display = "block";
+        loading.style.display = "block";
+
+        let tempImage = new Image();
+        tempImage.src = url.value;
+
+        tempImage.addEventListener("load", function () {
+          image.src = url.value;
+          placeholder.style.display = "none";
+          loading.style.display = "none";
+        });
+      });
+
+      range.forEach(function (e) {
+        if (e.id === "hue-rotate") {
+          e.value = 0;
+        } else if (e.id === "blur") {
+          e.value = 0;
+        } else {
+          e.value = css[e.id] * 100;
+        }
+
+        e.addEventListener("input", (event) => {
+          let id = event.target.id;
+          let value;
+
+          if (id === "hue-rotate") {
+            console.log("id: ", id);
+            value = `${(event.target.value * 1) / 100}turn`;
+            console.log("value: ", value);
+          } else if (id === "blur") {
+            console.log("id: ", id);
+            value = `${event.target.value}px`;
+            console.log("value: ", value);
+          } else {
+            console.log("id: ", id);
+
+            value = (event.target.value * 1) / 100;
+            console.log("value: ", value);
+          }
+
+          css[`${id}`] = value;
+          console.table(css);
+
+          image.style.filter = `brightness(${css.brightness}) contrast(${css.contrast}) hue-rotate(${css["hue-rotate"]}) blur(${css.blur}) saturate(${css.saturate}) sepia(${css.sepia})`;
+        });
+      });
+    </script>
+  </body>
+</html>
